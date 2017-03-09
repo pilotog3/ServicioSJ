@@ -14,6 +14,41 @@ namespace Piloxy.ListaEspera
         public VentanaPrincipal()
         {
             InitializeComponent();
+            CargarPanelCargaArchivo();
+            Commons.BarraProceso.Instance.FormPrincipal = this;
         }
+        public void CargarVentanaListaEspera()
+        {
+            panelPrincipal.Controls.Clear();
+            var panelListaEspera = new PanelListaEspera();
+            panelPrincipal.Controls.Add(panelListaEspera);
+            panelListaEspera.AjustesTamaño();
+            panelPrincipal.Controls[0].Visible = true;
+        }
+        public void CargarVentanaListaEspera(List<Models.Paciente> pacientes)
+        {
+            panelPrincipal.Controls.Clear();
+            var panelListaEspera = new PanelListaEspera(ref pacientes);
+            panelPrincipal.Controls.Add(panelListaEspera);
+            panelListaEspera.AjustesTamaño();
+            panelPrincipal.Controls[0].Visible = true;
+            Commons.BarraProceso.Instance.TerminarBarraProceso();
+        }
+        public void CargarPanelCargaArchivo()
+        {
+            panelPrincipal.Controls.Clear();
+            panelPrincipal.Controls.Add(new PanelCargaArchivo());
+            panelPrincipal.Controls[0].Visible = true;            
+        }        
+
+        private void salirToolStripMenuItem_Click(object sender, EventArgs e)
+        {
+            System.Windows.Forms.Application.Exit();
+        }
+
+        private void reporteToolStripMenuItem_Click(object sender, EventArgs e)
+        {
+        }
+        
     }
 }

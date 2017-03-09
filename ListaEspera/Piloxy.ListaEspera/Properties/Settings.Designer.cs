@@ -22,5 +22,17 @@ namespace Piloxy.ListaEspera.Properties {
                 return defaultInstance;
             }
         }
+        
+        [global::System.Configuration.UserScopedSettingAttribute()]
+        [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+        [global::System.Configuration.DefaultSettingValueAttribute("0, 0")]
+        public global::System.Drawing.Point Principio {
+            get {
+                return ((global::System.Drawing.Point)(this["Principio"]));
+            }
+            set {
+                this["Principio"] = value;
+            }
+        }
     }
 }

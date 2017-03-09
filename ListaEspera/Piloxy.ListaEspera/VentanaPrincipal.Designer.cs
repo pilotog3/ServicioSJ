@@ -28,86 +28,163 @@
         /// </summary>
         private void InitializeComponent()
         {
-            this.btnBuscarListaEspera = new System.Windows.Forms.Button();
-            this.openFileDialog1 = new System.Windows.Forms.OpenFileDialog();
-            this.textBox1 = new System.Windows.Forms.TextBox();
-            this.groupBox1 = new System.Windows.Forms.GroupBox();
-            this.btnCargarListaEspera = new System.Windows.Forms.Button();
-            this.progressBar1 = new System.Windows.Forms.ProgressBar();
-            this.groupBox1.SuspendLayout();
+            this.menuStrip1 = new System.Windows.Forms.MenuStrip();
+            this.archivoToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
+            this.abrirToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
+            this.listaEsperaToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
+            this.guardarToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
+            this.aOtroArchivoToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
+            this.enBaseDeDatosLocalToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
+            this.salirToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
+            this.configuracionToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
+            this.listaDeEsperaToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
+            this.diagnosticosToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
+            this.reporteToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
+            this.panelPrincipal = new System.Windows.Forms.Panel();
+            this.menuStrip1.SuspendLayout();
             this.SuspendLayout();
             // 
-            // btnBuscarListaEspera
+            // menuStrip1
             // 
-            this.btnBuscarListaEspera.Location = new System.Drawing.Point(420, 47);
-            this.btnBuscarListaEspera.Name = "btnBuscarListaEspera";
-            this.btnBuscarListaEspera.Size = new System.Drawing.Size(103, 23);
-            this.btnBuscarListaEspera.TabIndex = 0;
-            this.btnBuscarListaEspera.Text = "Buscar";
-            this.btnBuscarListaEspera.UseVisualStyleBackColor = true;
+            this.menuStrip1.Items.AddRange(new System.Windows.Forms.ToolStripItem[] {
+            this.archivoToolStripMenuItem,
+            this.configuracionToolStripMenuItem});
+            this.menuStrip1.Location = new System.Drawing.Point(0, 0);
+            this.menuStrip1.Name = "menuStrip1";
+            this.menuStrip1.Size = new System.Drawing.Size(660, 24);
+            this.menuStrip1.TabIndex = 4;
+            this.menuStrip1.Text = "menuStrip1";
             // 
-            // openFileDialog1
+            // archivoToolStripMenuItem
             // 
-            this.openFileDialog1.FileName = "openFileDialog1";
+            this.archivoToolStripMenuItem.DropDownItems.AddRange(new System.Windows.Forms.ToolStripItem[] {
+            this.abrirToolStripMenuItem,
+            this.guardarToolStripMenuItem,
+            this.salirToolStripMenuItem});
+            this.archivoToolStripMenuItem.Name = "archivoToolStripMenuItem";
+            this.archivoToolStripMenuItem.Size = new System.Drawing.Size(60, 20);
+            this.archivoToolStripMenuItem.Text = "Archivo";
             // 
-            // textBox1
+            // abrirToolStripMenuItem
             // 
-            this.textBox1.Location = new System.Drawing.Point(28, 49);
-            this.textBox1.Name = "textBox1";
-            this.textBox1.Size = new System.Drawing.Size(386, 20);
-            this.textBox1.TabIndex = 1;
+            this.abrirToolStripMenuItem.DropDownItems.AddRange(new System.Windows.Forms.ToolStripItem[] {
+            this.listaEsperaToolStripMenuItem});
+            this.abrirToolStripMenuItem.Name = "abrirToolStripMenuItem";
+            this.abrirToolStripMenuItem.Size = new System.Drawing.Size(116, 22);
+            this.abrirToolStripMenuItem.Text = "Abrir";
             // 
-            // groupBox1
+            // listaEsperaToolStripMenuItem
             // 
-            this.groupBox1.Controls.Add(this.btnCargarListaEspera);
-            this.groupBox1.Controls.Add(this.textBox1);
-            this.groupBox1.Controls.Add(this.btnBuscarListaEspera);
-            this.groupBox1.Location = new System.Drawing.Point(58, 77);
-            this.groupBox1.Name = "groupBox1";
-            this.groupBox1.Size = new System.Drawing.Size(529, 116);
-            this.groupBox1.TabIndex = 2;
-            this.groupBox1.TabStop = false;
-            this.groupBox1.Text = "Lista De Espera";
+            this.listaEsperaToolStripMenuItem.Name = "listaEsperaToolStripMenuItem";
+            this.listaEsperaToolStripMenuItem.Size = new System.Drawing.Size(132, 22);
+            this.listaEsperaToolStripMenuItem.Text = "ListaEspera";
             // 
-            // btnCargarListaEspera
+            // guardarToolStripMenuItem
             // 
-            this.btnCargarListaEspera.Location = new System.Drawing.Point(203, 87);
-            this.btnCargarListaEspera.Name = "btnCargarListaEspera";
-            this.btnCargarListaEspera.Size = new System.Drawing.Size(103, 23);
-            this.btnCargarListaEspera.TabIndex = 2;
-            this.btnCargarListaEspera.Text = "Cargar";
-            this.btnCargarListaEspera.UseVisualStyleBackColor = true;
+            this.guardarToolStripMenuItem.DropDownItems.AddRange(new System.Windows.Forms.ToolStripItem[] {
+            this.aOtroArchivoToolStripMenuItem,
+            this.enBaseDeDatosLocalToolStripMenuItem});
+            this.guardarToolStripMenuItem.Name = "guardarToolStripMenuItem";
+            this.guardarToolStripMenuItem.Size = new System.Drawing.Size(116, 22);
+            this.guardarToolStripMenuItem.Text = "Guardar";
             // 
-            // progressBar1
+            // aOtroArchivoToolStripMenuItem
             // 
-            this.progressBar1.Location = new System.Drawing.Point(194, 393);
-            this.progressBar1.Name = "progressBar1";
-            this.progressBar1.Size = new System.Drawing.Size(245, 23);
-            this.progressBar1.TabIndex = 3;
+            this.aOtroArchivoToolStripMenuItem.Name = "aOtroArchivoToolStripMenuItem";
+            this.aOtroArchivoToolStripMenuItem.Size = new System.Drawing.Size(190, 22);
+            this.aOtroArchivoToolStripMenuItem.Text = "A otro archivo";
+            // 
+            // enBaseDeDatosLocalToolStripMenuItem
+            // 
+            this.enBaseDeDatosLocalToolStripMenuItem.Name = "enBaseDeDatosLocalToolStripMenuItem";
+            this.enBaseDeDatosLocalToolStripMenuItem.Size = new System.Drawing.Size(190, 22);
+            this.enBaseDeDatosLocalToolStripMenuItem.Text = "En base de datos local";
+            // 
+            // salirToolStripMenuItem
+            // 
+            this.salirToolStripMenuItem.Name = "salirToolStripMenuItem";
+            this.salirToolStripMenuItem.Size = new System.Drawing.Size(116, 22);
+            this.salirToolStripMenuItem.Text = "Salir";
+            this.salirToolStripMenuItem.Click += new System.EventHandler(this.salirToolStripMenuItem_Click);
+            // 
+            // configuracionToolStripMenuItem
+            // 
+            this.configuracionToolStripMenuItem.DropDownItems.AddRange(new System.Windows.Forms.ToolStripItem[] {
+            this.listaDeEsperaToolStripMenuItem,
+            this.reporteToolStripMenuItem});
+            this.configuracionToolStripMenuItem.Name = "configuracionToolStripMenuItem";
+            this.configuracionToolStripMenuItem.Size = new System.Drawing.Size(95, 20);
+            this.configuracionToolStripMenuItem.Text = "Configuracion";
+            // 
+            // listaDeEsperaToolStripMenuItem
+            // 
+            this.listaDeEsperaToolStripMenuItem.DropDownItems.AddRange(new System.Windows.Forms.ToolStripItem[] {
+            this.diagnosticosToolStripMenuItem});
+            this.listaDeEsperaToolStripMenuItem.Name = "listaDeEsperaToolStripMenuItem";
+            this.listaDeEsperaToolStripMenuItem.Size = new System.Drawing.Size(151, 22);
+            this.listaDeEsperaToolStripMenuItem.Text = "Lista de espera";
+            // 
+            // diagnosticosToolStripMenuItem
+            // 
+            this.diagnosticosToolStripMenuItem.Name = "diagnosticosToolStripMenuItem";
+            this.diagnosticosToolStripMenuItem.Size = new System.Drawing.Size(142, 22);
+            this.diagnosticosToolStripMenuItem.Text = "Diagnosticos";
+            // 
+            // reporteToolStripMenuItem
+            // 
+            this.reporteToolStripMenuItem.Name = "reporteToolStripMenuItem";
+            this.reporteToolStripMenuItem.Size = new System.Drawing.Size(151, 22);
+            this.reporteToolStripMenuItem.Text = "Reporte";
+            this.reporteToolStripMenuItem.Click += new System.EventHandler(this.reporteToolStripMenuItem_Click);
+            // 
+            // panelPrincipal
+            // 
+            this.panelPrincipal.Anchor = ((System.Windows.Forms.AnchorStyles)((((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Bottom) 
+            | System.Windows.Forms.AnchorStyles.Left) 
+            | System.Windows.Forms.AnchorStyles.Right)));
+            this.panelPrincipal.AutoSize = true;
+            this.panelPrincipal.Location = new System.Drawing.Point(12, 28);
+            this.panelPrincipal.MaximumSize = new System.Drawing.Size(1240, 720);
+            this.panelPrincipal.Name = "panelPrincipal";
+            this.panelPrincipal.Size = new System.Drawing.Size(636, 288);
+            this.panelPrincipal.TabIndex = 5;
             // 
             // VentanaPrincipal
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
-            this.ClientSize = new System.Drawing.Size(660, 428);
-            this.Controls.Add(this.progressBar1);
-            this.Controls.Add(this.groupBox1);
+            this.AutoSize = true;
+            this.AutoSizeMode = System.Windows.Forms.AutoSizeMode.GrowAndShrink;
+            this.ClientSize = new System.Drawing.Size(660, 328);
+            this.Controls.Add(this.panelPrincipal);
+            this.Controls.Add(this.menuStrip1);
+            this.DataBindings.Add(new System.Windows.Forms.Binding("Location", global::Piloxy.ListaEspera.Properties.Settings.Default, "Principio", true, System.Windows.Forms.DataSourceUpdateMode.OnPropertyChanged));
+            this.Location = global::Piloxy.ListaEspera.Properties.Settings.Default.Principio;
+            this.MainMenuStrip = this.menuStrip1;
+            this.MaximumSize = new System.Drawing.Size(1240, 720);
             this.Name = "VentanaPrincipal";
             this.Text = "Excel Servicios";
-            this.groupBox1.ResumeLayout(false);
-            this.groupBox1.PerformLayout();
+            this.menuStrip1.ResumeLayout(false);
+            this.menuStrip1.PerformLayout();
             this.ResumeLayout(false);
+            this.PerformLayout();
 
         }
 
         #endregion
-
-        private System.Windows.Forms.Button btnBuscarListaEspera;
-        private System.Windows.Forms.OpenFileDialog openFileDialog1;
-        private System.Windows.Forms.TextBox textBox1;
-        private System.Windows.Forms.GroupBox groupBox1;
-        private System.Windows.Forms.Button btnCargarListaEspera;
-        private System.Windows.Forms.ProgressBar progressBar1;
+        private System.Windows.Forms.MenuStrip menuStrip1;
+        private System.Windows.Forms.ToolStripMenuItem archivoToolStripMenuItem;
+        private System.Windows.Forms.ToolStripMenuItem abrirToolStripMenuItem;
+        private System.Windows.Forms.ToolStripMenuItem listaEsperaToolStripMenuItem;
+        private System.Windows.Forms.ToolStripMenuItem guardarToolStripMenuItem;
+        private System.Windows.Forms.ToolStripMenuItem aOtroArchivoToolStripMenuItem;
+        private System.Windows.Forms.ToolStripMenuItem enBaseDeDatosLocalToolStripMenuItem;
+        private System.Windows.Forms.ToolStripMenuItem salirToolStripMenuItem;
+        private System.Windows.Forms.ToolStripMenuItem configuracionToolStripMenuItem;
+        private System.Windows.Forms.ToolStripMenuItem listaDeEsperaToolStripMenuItem;
+        private System.Windows.Forms.ToolStripMenuItem diagnosticosToolStripMenuItem;
+        private System.Windows.Forms.ToolStripMenuItem reporteToolStripMenuItem;
+        private System.Windows.Forms.Panel panelPrincipal;
     }
 }
 

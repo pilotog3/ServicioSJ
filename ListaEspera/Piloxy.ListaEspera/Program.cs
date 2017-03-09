@@ -13,7 +13,6 @@ namespace Piloxy.ListaEspera
         [STAThread]
         static void Main()
         {
-            Application.Test.TestClass.Test();
             System.Windows.Forms.Application.EnableVisualStyles();
             System.Windows.Forms.Application.SetCompatibleTextRenderingDefault(false);
             System.Windows.Forms.Application.Run(new VentanaPrincipal());
