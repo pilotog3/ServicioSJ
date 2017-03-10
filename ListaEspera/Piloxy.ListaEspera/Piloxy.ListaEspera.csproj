@@ -48,6 +48,7 @@
     <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="Commons\ListaEsperaPacientes.cs" />
     <Compile Include="PanelBarraCargando.cs">
       <SubType>Form</SubType>
     </Compile>

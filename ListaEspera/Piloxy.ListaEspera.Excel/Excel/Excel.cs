@@ -38,5 +38,18 @@ namespace Piloxy.ListaEspera.Application.Excel
                 throw new Exception("No es posible cargar el Excel.");
             }
         }
+
+        public List<T> ObtenerModels<T>(TipoArchivoEnum tipoArchivo,Action<int> callback) where T : class
+        {
+            try
+            {
+                return _lector.ObtenerModels<T>(tipoArchivo,callback);
+            }
+            catch (Exception ex)
+            {
+                //Log(ex.Error);
+                throw new Exception("No es posible cargar el Excel.");
+            }
+        }
     }
 }

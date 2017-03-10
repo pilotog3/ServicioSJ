@@ -41,9 +41,10 @@
             this.DiagnosticoSospecha = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.DiagnosticoConfirmacion = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.groupBox1 = new System.Windows.Forms.GroupBox();
+            this.txtMuestra = new System.Windows.Forms.TextBox();
             this.btnFiltro = new System.Windows.Forms.Button();
             this.textFiltro = new System.Windows.Forms.TextBox();
-            this.txtMuestra = new System.Windows.Forms.TextBox();
+            this.workerFiltrarGrilla = new System.ComponentModel.BackgroundWorker();
             ((System.ComponentModel.ISupportInitialize)(this.grillaPacientes)).BeginInit();
             this.groupBox1.SuspendLayout();
             this.SuspendLayout();
@@ -148,6 +149,14 @@
             this.groupBox1.TabStop = false;
             this.groupBox1.Text = "Filtro";
             // 
+            // txtMuestra
+            // 
+            this.txtMuestra.Location = new System.Drawing.Point(545, 52);
+            this.txtMuestra.Multiline = true;
+            this.txtMuestra.Name = "txtMuestra";
+            this.txtMuestra.Size = new System.Drawing.Size(404, 63);
+            this.txtMuestra.TabIndex = 2;
+            // 
             // btnFiltro
             // 
             this.btnFiltro.Location = new System.Drawing.Point(335, 74);
@@ -165,14 +174,6 @@
             this.textFiltro.Size = new System.Drawing.Size(276, 20);
             this.textFiltro.TabIndex = 0;
             // 
-            // txtMuestra
-            // 
-            this.txtMuestra.Location = new System.Drawing.Point(545, 52);
-            this.txtMuestra.Multiline = true;
-            this.txtMuestra.Name = "txtMuestra";
-            this.txtMuestra.Size = new System.Drawing.Size(404, 63);
-            this.txtMuestra.TabIndex = 2;
-            // 
             // PanelListaEspera
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
@@ -186,6 +187,8 @@
             this.groupBox1.PerformLayout();
             this.ResumeLayout(false);
 
+            this.workerFiltrarGrilla.DoWork += new System.ComponentModel.DoWorkEventHandler(this.FiltrarGrilla);
+            this.workerFiltrarGrilla.RunWorkerCompleted += new System.ComponentModel.RunWorkerCompletedEventHandler(this.TerminoGrilla);
         }
 
         #endregion
@@ -206,5 +209,6 @@
         private System.Windows.Forms.Button btnFiltro;
         private System.Windows.Forms.TextBox textFiltro;
         private System.Windows.Forms.TextBox txtMuestra;
+        private System.ComponentModel.BackgroundWorker workerFiltrarGrilla;
     }
 }

@@ -10,12 +10,13 @@ namespace Piloxy.ListaEspera.Commons
 {
     public class BarraProceso
     {
+        private bool _estaActivo;
         private static BarraProceso instance;
         private PanelBarraCargando _panelBarraCargando;
-        private ProgressBar _bar;
         public Control FormPrincipal { get; set; }
 
         private BarraProceso() {
+            _estaActivo = false;
         }
 
         public static BarraProceso Instance
@@ -30,40 +31,44 @@ namespace Piloxy.ListaEspera.Commons
             }
         }
 
-        public void IniciarBarraProceso(BackgroundWorker worker)
+        public void IniciarBarraProceso()
         {
+            if (_estaActivo)
+                return;
+
+            if (_panelBarraCargando == null)
+                _panelBarraCargando = new PanelBarraCargando();
+
+            _estaActivo = true;
 
             this.FormPrincipal.Invoke((MethodInvoker)delegate {
-
                 _panelBarraCargando = new PanelBarraCargando();
             });
             
+            _panelBarraCargando.SetUndefined();
+
             if (this.FormPrincipal != null)
                 _panelBarraCargando.Show(this.FormPrincipal);
             else
                 _panelBarraCargando.Show();
-
-            worker.RunWorkerAsync();
         }
         public void TerminarBarraProceso()
         {
-            //_task.Dispose();
-            _panelBarraCargando.Close();
-        }
-
-        private void GetBarra(Control.ControlCollection controles)
-        {
-            if (_bar != null)
+            if (!_estaActivo)
                 return;
 
-            foreach (var control in controles)
-            {
-                if (control.GetType() == typeof(ProgressBar))
-                {
-                    _bar = (ProgressBar)control;
-                    break;
-                }
-            }
+            _estaActivo = false;
+            _panelBarraCargando.Close();
+        }
+        public void SetUndefined()
+        {
+            _panelBarraCargando.SetUndefined();
+        }
+
+        public void SetValue(int value)
+        {
+            if (_panelBarraCargando != null)
+                _panelBarraCargando.SetValue(value);
         }
         
     }

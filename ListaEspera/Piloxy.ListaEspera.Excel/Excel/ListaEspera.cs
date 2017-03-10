@@ -12,27 +12,58 @@ namespace Piloxy.ListaEspera.Application.Excel
     class ListaEspera : ILeible<Paciente>, IGuardable<Paciente>
     {
         private Dictionary<string, int> _columnHeader;
+        private int _totalPacientes;
+        private int _numeroActual;
         
         public List<Paciente> ObtenerDatos(ExcelWorkbook excel)
         {
-            return ObtenerAbierto(excel);
+            _totalPacientes = 0;
+            _numeroActual = 0;
+            var hojaAbierto = ObtenerAbierto(excel);
+            var hojaCerrado = ObtenerCerrado(excel);
+            var listaPaciente = MapearExcel(hojaAbierto);
+            listaPaciente.AddRange(MapearExcel(hojaCerrado));
+            return listaPaciente;
+        }
+        public List<Paciente> ObtenerDatos(ExcelWorkbook excel, Action<int> callback)
+        {
+            _totalPacientes = 0;
+            _numeroActual = 0;
+            var hojaAbierto = ObtenerAbierto(excel);
+            var hojaCerrado = ObtenerCerrado(excel);
+            var listaPaciente = MapearExcel(hojaAbierto,callback);
+            listaPaciente.AddRange(MapearExcel(hojaCerrado,callback));
+            return listaPaciente;
         }
 
-        private List<Paciente> ObtenerAbierto(ExcelWorkbook excel)
+        private ExcelWorksheet ObtenerAbierto(ExcelWorkbook excel)
         {
             var excelAbiertos = ObtenerByName(excel, "abiertos");
+            _totalPacientes += excelAbiertos.Dimension.End.Row - 1;
+            return excelAbiertos;
+        }
 
-            var header = ObtenerHeader(excelAbiertos);
-            
+        private ExcelWorksheet ObtenerCerrado(ExcelWorkbook excel)
+        {
+            var excelCerrados = ObtenerByName(excel, "cerrado");
+            _totalPacientes += excelCerrados.Dimension.End.Row - 1;
+            return excelCerrados;
+        }
+
+        private List<Paciente> MapearExcel(ExcelWorksheet hoja)
+        {
+
+            var header = ObtenerHeader(hoja);
+
             var pacientes = new List<Paciente>();
-            for (int j = excelAbiertos.Dimension.Start.Row + 1; j <= excelAbiertos.Dimension.End.Row; j++)
+            for (int j = hoja.Dimension.Start.Row + 1; j <= hoja.Dimension.End.Row; j++)
             {
-                var cells = excelAbiertos.Cells;
+                var cells = hoja.Cells;
 
                 var paciente = new Paciente()
                 {
                     Estado = ExcelHelper.GetColumnNumberByContainName(header, cells, j, "Estado"),
-                    Rut = ExcelHelper.GetColumnNumberByName<int>(header, cells, j,"Run"),
+                    Rut = ExcelHelper.GetColumnNumberByName<int>(header, cells, j, "Run"),
                     Dv = ExcelHelper.GetColumnNumberByContainName(header, cells, j, "Dv"),
                     Nombres = ExcelHelper.GetColumnNumberByContainName(header, cells, j, "Nombres"),
                     ApellidoPaterno = ExcelHelper.GetColumnNumberByContainName(header, cells, j, "Primer_Apellido"),
@@ -50,12 +81,47 @@ namespace Piloxy.ListaEspera.Application.Excel
 
                 pacientes.Add(paciente);
             }
-            
+
 
             return pacientes;
         }
         
+        private List<Paciente> MapearExcel(ExcelWorksheet hoja,Action<int> callback)
+        {
+            var header = ObtenerHeader(hoja);
 
+            var pacientes = new List<Paciente>();
+            for (int j = hoja.Dimension.Start.Row + 1; j <= hoja.Dimension.End.Row; j++)
+            {
+                var cells = hoja.Cells;
+
+                var paciente = new Paciente()
+                {
+                    Estado = ExcelHelper.GetColumnNumberByContainName(header, cells, j, "Estado"),
+                    Rut = ExcelHelper.GetColumnNumberByName<int>(header, cells, j, "Run"),
+                    Dv = ExcelHelper.GetColumnNumberByContainName(header, cells, j, "Dv"),
+                    Nombres = ExcelHelper.GetColumnNumberByContainName(header, cells, j, "Nombres"),
+                    ApellidoPaterno = ExcelHelper.GetColumnNumberByContainName(header, cells, j, "Primer_Apellido"),
+                    ApellidoMaterno = ExcelHelper.GetColumnNumberByContainName(header, cells, j, "Segundo_Apellido"),
+                    FechaEntrada = ExcelHelper.GetColumnNumberByContainName<DateTime>(header, cells, j, "F_Entrada"),
+                    FechaSalida = ExcelHelper.GetColumnNumberByContainName<DateTime>(header, cells, j, "F_Salida"),
+                    CausaSalida = ExcelHelper.GetColumnNumberByContainNameNullable<int>(header, cells, j, "C_Salida"),
+                    SospechaDiagnostico = ExcelHelper.GetColumnNumberByContainName(header, cells, j, "Sospecha"),
+                    ConfirmacionDiagnostico = ExcelHelper.GetColumnNumberByContainName(header, cells, j, "Confi"),
+                    Plano = ExcelHelper.GetColumnNumberByContainNameNullable<int>(header, cells, j, "Plano"),
+                    Servicio = ExcelHelper.GetColumnNumberByContainName(header, cells, j, "Servicio"),
+                    FonoFijo = ExcelHelper.GetColumnNumberByContainName(header, cells, j, "Fijo"),
+                    FojoMovil = ExcelHelper.GetColumnNumberByContainName(header, cells, j, "Movil")
+                };
+                pacientes.Add(paciente);
+                var porcentaje = ((++_numeroActual) * 100 / _totalPacientes);
+                callback(porcentaje);
+            }
+
+
+
+            return pacientes;
+        }
         private ExcelWorksheet ObtenerByName(ExcelWorkbook excel,string name)
         {
             return excel.Worksheets.FirstOrDefault(d => d.Name.ToLower().Contains(name));

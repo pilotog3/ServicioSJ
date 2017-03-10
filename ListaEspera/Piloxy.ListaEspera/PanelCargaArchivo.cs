@@ -11,7 +11,6 @@ namespace Piloxy.ListaEspera
 {
     public partial class PanelCargaArchivo : UserControl
     {
-        private Application.Excel.Excel _excel;
         public PanelCargaArchivo()
         {
             InitializeComponent();
@@ -35,12 +34,8 @@ namespace Piloxy.ListaEspera
 
             try
             {
-                Commons.BarraProceso.Instance.IniciarBarraProceso(workerCargaArchivos);
-                _excel = new Application.Excel.Excel(textRutaListaEspera.Text);
-                var listaPacientes = _excel.ObtenerModels<Models.Paciente>(Application.Enums.TipoArchivoEnum.ListaEspera);
-                var ventana = Helper.FormHelper.GetPrincipal(this.Parent);
-
-                ventana.CargarVentanaListaEspera(listaPacientes);
+                Commons.BarraProceso.Instance.IniciarBarraProceso();
+                workerCargaArchivos.RunWorkerAsync();
             }
             catch (Exception ex)
             {
@@ -49,8 +44,29 @@ namespace Piloxy.ListaEspera
                 return;
             }
         }
+        
+        private void DoWork(object sender, DoWorkEventArgs e)
+        {
+            var excel = new Application.Excel.Excel(textRutaListaEspera.Text);
+            Commons.ListaEsperaPacientes.Instance.ListaPacientes = excel.ObtenerModels<Models.Paciente>(Application.Enums.TipoArchivoEnum.ListaEspera, MostrarAvance);
 
-        
-        
+        }
+
+        private void CargarVentana(object sender, RunWorkerCompletedEventArgs e)
+        {
+            var ventana = Helper.FormHelper.GetPrincipal(this.Parent);
+            ventana.CargarVentanaListaEspera();
+        }
+
+        private void Progress(object sender, ProgressChangedEventArgs e)
+        {
+            Commons.BarraProceso.Instance.SetValue(e.ProgressPercentage);
+
+        }
+
+        private void MostrarAvance(int porcentaje)
+        {
+            workerCargaArchivos.ReportProgress(porcentaje);
+        }
     }
 }

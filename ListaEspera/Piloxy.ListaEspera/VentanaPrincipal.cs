@@ -19,6 +19,7 @@ namespace Piloxy.ListaEspera
         }
         public void CargarVentanaListaEspera()
         {
+            Commons.BarraProceso.Instance.TerminarBarraProceso();
             panelPrincipal.Controls.Clear();
             var panelListaEspera = new PanelListaEspera();
             panelPrincipal.Controls.Add(panelListaEspera);
@@ -27,12 +28,12 @@ namespace Piloxy.ListaEspera
         }
         public void CargarVentanaListaEspera(List<Models.Paciente> pacientes)
         {
+            Commons.BarraProceso.Instance.TerminarBarraProceso();
             panelPrincipal.Controls.Clear();
             var panelListaEspera = new PanelListaEspera(ref pacientes);
             panelPrincipal.Controls.Add(panelListaEspera);
             panelListaEspera.AjustesTamaño();
             panelPrincipal.Controls[0].Visible = true;
-            Commons.BarraProceso.Instance.TerminarBarraProceso();
         }
         public void CargarPanelCargaArchivo()
         {

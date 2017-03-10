@@ -77,6 +77,13 @@
             this.btnBuscarListaEspera.UseVisualStyleBackColor = true;
             this.btnBuscarListaEspera.Click += new System.EventHandler(this.btnBuscarListaEspera_Click);
             // 
+            // workerCargaArchivos
+            // 
+            this.workerCargaArchivos.WorkerReportsProgress = true;
+            this.workerCargaArchivos.DoWork += new System.ComponentModel.DoWorkEventHandler(this.DoWork);
+            this.workerCargaArchivos.ProgressChanged += new System.ComponentModel.ProgressChangedEventHandler(this.Progress);
+            this.workerCargaArchivos.RunWorkerCompleted += new System.ComponentModel.RunWorkerCompletedEventHandler(this.CargarVentana);
+            // 
             // PanelCargaArchivo
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);

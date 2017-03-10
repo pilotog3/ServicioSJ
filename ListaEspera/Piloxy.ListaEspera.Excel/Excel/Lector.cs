@@ -21,6 +21,12 @@ namespace Piloxy.ListaEspera.Application.Excel
             var manipulador = Factory.FactoryListaEspera.ObtenerLeible<T>(tipoArchivo);
             return manipulador.ObtenerDatos(_excel);
         }
-        
+
+        public List<T> ObtenerModels<T>(TipoArchivoEnum tipoArchivo,Action<int> callback) where T : class
+        {
+            var manipulador = Factory.FactoryListaEspera.ObtenerLeible<T>(tipoArchivo);
+            return manipulador.ObtenerDatos(_excel,callback);
+        }
+
     }
 }
