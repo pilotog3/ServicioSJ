@@ -43,6 +43,7 @@
             this.groupBox1 = new System.Windows.Forms.GroupBox();
             this.btnFiltro = new System.Windows.Forms.Button();
             this.textFiltro = new System.Windows.Forms.TextBox();
+            this.txtMuestra = new System.Windows.Forms.TextBox();
             ((System.ComponentModel.ISupportInitialize)(this.grillaPacientes)).BeginInit();
             this.groupBox1.SuspendLayout();
             this.SuspendLayout();
@@ -68,6 +69,7 @@
             this.grillaPacientes.Name = "grillaPacientes";
             this.grillaPacientes.Size = new System.Drawing.Size(1144, 462);
             this.grillaPacientes.TabIndex = 0;
+            this.grillaPacientes.CellClick += new System.Windows.Forms.DataGridViewCellEventHandler(this.grillaPacientes_CellClick);
             // 
             // Estado
             // 
@@ -136,6 +138,7 @@
             // 
             // groupBox1
             // 
+            this.groupBox1.Controls.Add(this.txtMuestra);
             this.groupBox1.Controls.Add(this.btnFiltro);
             this.groupBox1.Controls.Add(this.textFiltro);
             this.groupBox1.Location = new System.Drawing.Point(3, 12);
@@ -147,19 +150,28 @@
             // 
             // btnFiltro
             // 
-            this.btnFiltro.Location = new System.Drawing.Point(670, 64);
+            this.btnFiltro.Location = new System.Drawing.Point(335, 74);
             this.btnFiltro.Name = "btnFiltro";
             this.btnFiltro.Size = new System.Drawing.Size(75, 23);
             this.btnFiltro.TabIndex = 1;
             this.btnFiltro.Text = "Buscar";
             this.btnFiltro.UseVisualStyleBackColor = true;
+            this.btnFiltro.Click += new System.EventHandler(this.btnFiltro_Click);
             // 
             // textFiltro
             // 
-            this.textFiltro.Location = new System.Drawing.Point(373, 66);
+            this.textFiltro.Location = new System.Drawing.Point(37, 76);
             this.textFiltro.Name = "textFiltro";
             this.textFiltro.Size = new System.Drawing.Size(276, 20);
             this.textFiltro.TabIndex = 0;
+            // 
+            // txtMuestra
+            // 
+            this.txtMuestra.Location = new System.Drawing.Point(545, 52);
+            this.txtMuestra.Multiline = true;
+            this.txtMuestra.Name = "txtMuestra";
+            this.txtMuestra.Size = new System.Drawing.Size(404, 63);
+            this.txtMuestra.TabIndex = 2;
             // 
             // PanelListaEspera
             // 
@@ -193,5 +205,6 @@
         private System.Windows.Forms.GroupBox groupBox1;
         private System.Windows.Forms.Button btnFiltro;
         private System.Windows.Forms.TextBox textFiltro;
+        private System.Windows.Forms.TextBox txtMuestra;
     }
 }

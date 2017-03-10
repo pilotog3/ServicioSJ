@@ -21,7 +21,7 @@ namespace Piloxy.ListaEspera
         {
             _listaPacientes = listaPacientes;
             InitializeComponent();
-            CargarPacientesGrilla();
+            CargarPacientesGrilla(_listaPacientes);
         }
 
         public void AjustesTamaño()
@@ -31,12 +31,14 @@ namespace Piloxy.ListaEspera
             panel.AutoSize = true;
         }
 
-        private void CargarPacientesGrilla()
+        private void CargarPacientesGrilla(List<Models.Paciente> listaPacientes)
         {
-            DataTable dat=new DataTable();
-            foreach (var pac in _listaPacientes)
+            if (grillaPacientes.Rows.Count > 0)
+                grillaPacientes.Rows.Clear();
+
+            foreach (var pac in listaPacientes)
             {
-                dat.Rows.Add
+                grillaPacientes.Rows.Add
                     (
                         pac.Estado,
                         pac.Rut,
@@ -46,15 +48,51 @@ namespace Piloxy.ListaEspera
                         pac.Nombres,
                         pac.FechaEntrada,
                         pac.FechaSalida,
+                        pac.CausaSalida,
                         pac.SospechaDiagnostico,
-                        pac.ConfirmacionDiagnostico,
-                        pac.CausaSalida
+                        pac.ConfirmacionDiagnostico
                     );
             }
-
-
-            grillaPacientes.DataSource = dat;
         }
-        
+
+        private void btnFiltro_Click(object sender, EventArgs e)
+        {
+            if (string.IsNullOrEmpty(textFiltro.Text))
+                MessageBox.Show("Agrega un criterio de busqueda.","Error al buscar.");
+
+            var filtro = textFiltro.Text;
+
+            List<Models.Paciente> pacientesFiltrados = new List<Models.Paciente>();
+
+            foreach (var paciente in _listaPacientes)
+            {
+                if (paciente.Rut.ToString().ToLower().Contains(filtro.ToLower()) ||
+                    paciente.RutCompleto.ToLower().Contains(filtro.ToLower()) ||
+                   paciente.ApellidoPaterno.ToLower().Contains(filtro.ToLower()) ||
+                   paciente.ApellidoMaterno.ToLower().Contains(filtro.ToLower()) ||
+                   paciente.ApellidoPaterno.ToLower().Contains(filtro.ToLower()) ||
+                   paciente.SospechaDiagnostico.ToLower().Contains(filtro.ToLower()) ||
+                   paciente.ConfirmacionDiagnostico.ToLower().Contains(filtro.ToLower())
+                   )
+                 pacientesFiltrados.Add(paciente);
+            }
+
+            CargarPacientesGrilla(pacientesFiltrados);
+        }
+
+        private void grillaPacientes_CellClick(object sender, DataGridViewCellEventArgs e)
+        {
+            if(e.RowIndex >= 0 && e.ColumnIndex >= 0)
+            CambiarTextoMuestra(e.RowIndex, e.ColumnIndex);
+        }
+
+        private void CambiarTextoMuestra(int row, int column)
+        {
+            var cell = grillaPacientes.Rows[row].Cells[column];
+            if (cell.Value == null)
+                txtMuestra.Text = "";
+            
+            txtMuestra.Text = cell.Value.ToString();
+        }
     }
 }
