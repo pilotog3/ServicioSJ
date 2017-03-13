@@ -48,6 +48,7 @@ namespace Piloxy.ListaEspera
         private void DoWork(object sender, DoWorkEventArgs e)
         {
             var excel = new Application.Excel.Excel(textRutaListaEspera.Text);
+            excel.ObtenerColumnas();
             Commons.ListaEsperaPacientes.Instance.ListaPacientes = excel.ObtenerModels<Models.Paciente>(Application.Enums.TipoArchivoEnum.ListaEspera, MostrarAvance);
 
         }

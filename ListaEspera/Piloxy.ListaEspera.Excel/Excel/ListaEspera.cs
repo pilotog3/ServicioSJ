@@ -122,6 +122,30 @@ namespace Piloxy.ListaEspera.Application.Excel
 
             return pacientes;
         }
+
+        public List<string> GetAllColumns(ExcelWorkbook excel)
+        {
+            var hoja = ObtenerAbierto(excel);
+
+            var listaColumnas = new List<string>();
+            for (int i = hoja.Dimension.Start.Column; i <= hoja.Dimension.End.Column; i++)
+            {
+                var cellValue = hoja.Cells[1, i].Value;
+                if (cellValue == null || string.IsNullOrEmpty(cellValue.ToString()))
+                    continue;
+
+                var stringValue = cellValue.ToString();
+                stringValue = stringValue.Replace("_", " ");
+                stringValue = stringValue.ToLower();
+                System.Globalization.TextInfo textInfo = new System.Globalization.CultureInfo("en-US", false).TextInfo;
+                stringValue = textInfo.ToTitleCase(stringValue);
+                stringValue = stringValue.Replace(" ", "");
+
+                listaColumnas.Add(stringValue);
+            }
+
+            return listaColumnas;
+        }
         private ExcelWorksheet ObtenerByName(ExcelWorkbook excel,string name)
         {
             return excel.Worksheets.FirstOrDefault(d => d.Name.ToLower().Contains(name));

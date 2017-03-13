@@ -2,6 +2,7 @@
 using Piloxy.ListaEspera.Application.Enums;
 using System;
 using System.Collections.Generic;
+using System.IO;
 using System.Linq;
 using System.Text;
 
@@ -50,6 +51,13 @@ namespace Piloxy.ListaEspera.Application.Excel
                 //Log(ex.Error);
                 throw new Exception("No es posible cargar el Excel.");
             }
+        }
+
+        public void ObtenerColumnas()
+        {
+            var listaEspera = new ListaEspera();
+            var lista = listaEspera.GetAllColumns(_excel);
+            File.WriteAllText("COLUMNAS.TXT",string.Join("\n",lista.ToArray()));
         }
     }
 }
