@@ -46,11 +46,9 @@
     <WarningLevel>4</WarningLevel>
   </PropertyGroup>
   <ItemGroup>
-    <Reference Include="EntityFramework">
-      <HintPath>..\..\..\..\Projects\LocalApp.Sincro.ERP\Iconstruye.DTE.LocalApp.Sincronizador.ERP\packages\EntityFramework.6.1.3\lib\net40\EntityFramework.dll</HintPath>
-    </Reference>
     <Reference Include="System" />
     <Reference Include="System.ComponentModel.DataAnnotations" />
+    <Reference Include="System.configuration" />
     <Reference Include="System.Core" />
     <Reference Include="System.Runtime.Serialization" />
     <Reference Include="System.Security" />
@@ -61,6 +59,7 @@
   </ItemGroup>
   <ItemGroup>
     <Compile Include="Properties\AssemblyInfo.cs" />
+    <Compile Include="Repositorio\PacientesRepositorio.cs" />
   </ItemGroup>
   <ItemGroup>
     <BootstrapperPackage Include=".NETFramework,Version=v4.5">
@@ -85,6 +84,12 @@
       <CopyToOutputDirectory>Always</CopyToOutputDirectory>
       <DependentUpon>Pacientes.mdf</DependentUpon>
     </Content>
+  </ItemGroup>
+  <ItemGroup>
+    <ProjectReference Include="..\Piloxy.ListaEspera.Models\Piloxy.ListaEspera.Models.csproj">
+      <Project>{bac46098-12e8-4bf4-b67c-cedf3386dc2e}</Project>
+      <Name>Piloxy.ListaEspera.Models</Name>
+    </ProjectReference>
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
   <!-- To modify your build process, add your task inside one of the targets below and uncomment it. 

@@ -38,6 +38,7 @@
     <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="ConfiguracionExcel.cs" />
     <Compile Include="Helpers\ListaEsperaHelper.cs" />
     <Compile Include="Paciente.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
